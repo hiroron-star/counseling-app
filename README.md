@@ -1,11 +1,48 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# カウンセリングアプリ
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+カウンセリング店舗の検索・予約・相談ができるWebアプリケーションです。
+
+参考サイト: [カウンセリング.COM](https://www.kaunse-navi.com/counsel/kaunse)
+
+## 📚 ドキュメント
+
+- **[仕様書](./docs/SPECIFICATION.md)** - 機能要件と開発工程
+- **[技術開発ガイド](./docs/DEVELOPMENT.md)** - 実装手順と技術的な進め方
+
+## 🚀 技術スタック
+
+- **Laravel 12** - PHP Webアプリケーションフレームワーク
+- **Inertia.js** - LaravelとReactを連携
+- **React** - フロントエンドUIライブラリ
+- **Material-UI (MUI)** - React用デザインコンポーネント
+- **Docker Sail** - ローカル開発環境
+- **AWS Lightsail** - 本番環境（デプロイ先）
+
+## ⚡ クイックスタート
+
+```bash
+# 1. プロジェクトをクローン
+git clone https://github.com/hiroron-star/counseling-app.git
+cd counseling-app
+
+# 2. 環境ファイルをコピー
+cp .env.example .env
+
+# 3. Docker Sailで起動
+./vendor/bin/sail up -d
+./vendor/bin/sail artisan key:generate
+./vendor/bin/sail artisan migrate
+./vendor/bin/sail npm install
+./vendor/bin/sail npm run dev
+```
+
+ブラウザで http://localhost にアクセス
+
+詳細は [開発手順書](./docs/README.md) をご覧ください。
+
+---
+
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 ## About Laravel
 
