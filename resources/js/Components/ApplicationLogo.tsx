@@ -1,4 +1,6 @@
-export default function ApplicationLogo(props) {
+import { SVGProps } from 'react';
+
+export default function ApplicationLogo(props: SVGProps<SVGSVGElement>) {
     return (
         <svg
             {...props}
@@ -9,3 +11,4 @@ export default function ApplicationLogo(props) {
         </svg>
     );
 }
+
