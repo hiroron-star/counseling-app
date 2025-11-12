@@ -1,0 +1,63 @@
+<?php
+
+namespace Database\Factories;
+
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
+ */
+class PostFactory extends Factory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        $ageGroups = [
+            '10代前半',
+            '10代後半',
+            '20代前半',
+            '20代後半',
+            '30代前半',
+            '30代後半',
+            '40代前半',
+            '40代後半',
+            '50代前半',
+            '50代後半',
+        ];
+
+        $genders = ['男性', '女性'];
+        $prefectures = [
+            '北海道', '青森県', '岩手県', '宮城県', '秋田県', '山形県', '福島県',
+            '茨城県', '栃木県', '群馬県', '埼玉県', '千葉県', '東京都', '神奈川県',
+            '新潟県', '富山県', '石川県', '福井県', '山梨県', '長野県', '岐阜県', '静岡県', '愛知県',
+            '三重県', '滋賀県', '京都府', '大阪府', '兵庫県', '奈良県', '和歌山県',
+            '鳥取県', '島根県', '岡山県', '広島県', '山口県',
+            '徳島県', '香川県', '愛媛県', '高知県',
+            '福岡県', '佐賀県', '長崎県', '熊本県', '大分県', '宮崎県', '鹿児島県', '沖縄県',
+        ];
+
+        return [
+            'title' => fake()->randomElement([
+                '何をどうしたら良いのかわからない',
+                '職場に馴染めず、今後のキャリアに悩みます',
+                '時々目に見えない人に導かれている感覚になる時がある',
+                '娘の彼氏が不安です。',
+                '彼女のトラウマに触れました。。。',
+                '愛着障害等を持つ娘の恋愛について',
+                '今後の進め方について',
+                '共依存・精神的虐待から抜け出したい',
+                '共依存から抜け出したい',
+            ]),
+            'location' => fake()->randomElement($prefectures),
+            'age_group' => fake()->randomElement($ageGroups),
+            'gender' => fake()->randomElement($genders),
+            'snippet' => fake()->text(60),
+            'comment_count' => fake()->numberBetween(1, 20),
+            'status' => fake()->randomElement(['open', 'closed']),
+        ];
+    }
+}

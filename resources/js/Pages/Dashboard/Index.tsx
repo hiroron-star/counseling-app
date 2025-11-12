@@ -21,91 +21,22 @@ import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import StoreIcon from '@mui/icons-material/Store';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import AppLayout from '@/Components/Layouts/AppLayout';
+import { Link } from '@inertiajs/react';
 
 // ダミーデータ。バックエンド実装後はAPI経由に変更
-const posts = [
-    {
-        id: 1,
-        title: '何をどうしたら良いのかわからない',
-        location: '千葉県',
-        age: '20代前半',
-        gender: '男性',
-        snippet: '過去に気分変調症(持続性抑うつ障害)と診断さ...',
-        commentCount: 2,
-    },
-    {
-        id: 2,
-        title: '職場に馴染めず、今後のキャリアに悩みます',
-        location: '奈良県',
-        age: '30代後半',
-        gender: '女性',
-        snippet: 'こんにちは。今日は、職場のことで抱えている、...',
-        commentCount: 10,
-    },
-    {
-        id: 3,
-        title: '時々目に見えない人に導かれている感覚になる時がある',
-        location: '滋賀県',
-        age: '20代後半',
-        gender: '女性',
-        snippet: '私は、時々なのですがふと神様や仏様、ご先祖様...',
-        commentCount: 8,
-    },
-    {
-        id: 4,
-        title: '娘の彼氏が不安です。',
-        location: '東京都',
-        age: '50代前半',
-        gender: '女性',
-        snippet: '娘は半年ほど前に彼氏とけんかをして別れたので...',
-        commentCount: 3,
-    },
-    {
-        id: 5,
-        title: '彼女のトラウマに触れました。。。',
-        location: '北海道',
-        age: '40代前半',
-        gender: '男性',
-        snippet: 'こんばんは。彼女のトラウマに触れてしまい...',
-        commentCount: 6,
-    },
-    {
-        id: 6,
-        title: '愛着障害等を持つ娘の恋愛について',
-        location: '東京都',
-        age: '50代前半',
-        gender: '女性',
-        snippet: '私には25歳の娘がいます。娘は統合失調症を...',
-        commentCount: 5,
-    },
-    {
-        id: 7,
-        title: '今後の進め方について',
-        location: '福岡県',
-        age: '40代前半',
-        gender: '男性',
-        snippet: '先日ですが、妻の不倫が発覚しました。(探偵を...',
-        commentCount: 7,
-    },
-    {
-        id: 8,
-        title: '共依存・精神的虐待から抜け出したい',
-        location: '東京都',
-        age: '10代前半',
-        gender: '男性',
-        snippet: '私はADHD・ASD・鬱病だと今年に入ってか...',
-        commentCount: 4,
-    },
-    {
-        id: 9,
-        title: '共依存から抜け出したい',
-        location: '北海道',
-        age: '40代前半',
-        gender: '女性',
-        snippet: '私はこれまでつらくてもなかなか抜け出せない',
-        commentCount: 16,
-    },
-];
+type Post = {
+    id: number;
+    title: string;
+    location: string;
+    age: string;
+    gender: string;
+    snippet: string;
+    comment_count: number;
+};
+
+type Props = {
+    posts?: Post[];
+};
 
 const rankingItems = [
     '再発した神経障害から立ち直りた...',
@@ -141,11 +72,18 @@ const newStores = [
     },
 ];
 
-export default function Welcome() {
+export default function Welcome({ posts }: Props) {
+    const postsToRender = posts ?? [];
+
     return (
         <AppLayout title="ホーム">
             <Box sx={{ bgcolor: '#f6f6f6', pb: 6 }}>
                 <Container maxWidth="lg" sx={{ pt: 2 }}>
+                    <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 2 }}>
+                        <Button component={Link} href="/posts/create" variant="contained" color="primary">
+                            新規投稿
+                        </Button>
+                    </Box>
                     {/* Green tab bar */}
                     <Paper elevation={1} sx={{ bgcolor: '#2fb34a', borderRadius: 1, overflow: 'hidden' }}>
                         <Stack direction="row" spacing={0}>
@@ -267,51 +205,57 @@ export default function Welcome() {
                                 </Stack>
 
                                 <Stack spacing={2}>
-                                    {posts.map((post) => (
-                                        <Box
-                                            key={post.id}
-                                            sx={{
-                                                display: 'flex',
-                                                alignItems: 'flex-start',
-                                                gap: 2,
-                                                pb: 2,
-                                                borderBottom: '1px solid #e0e0e0',
-                                                '&:last-child': { borderBottom: 'none' },
-                                            }}
-                                        >
-                                            <HelpOutlineIcon sx={{ color: '#2fb34a', fontSize: 20, mt: 0.5 }} />
-                                            <Box sx={{ flex: 1 }}>
-                                                <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 0.5 }}>
-                                                    {post.title}
-                                                </Typography>
-                                                <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mb: 0.5 }}>
-                                                    {post.location} {post.age} {post.gender}
-                                                </Typography>
-                                                <Typography variant="body2" color="text.secondary">
-                                                    {post.snippet}
-                                                </Typography>
+                                    {postsToRender.length === 0 ? (
+                                        <Typography variant="body2" color="text.secondary">
+                                            投稿がまだありません。
+                                        </Typography>
+                                    ) : (
+                                        postsToRender.map((post) => (
+                                            <Box
+                                                key={post.id}
+                                                sx={{
+                                                    display: 'flex',
+                                                    alignItems: 'flex-start',
+                                                    gap: 2,
+                                                    pb: 2,
+                                                    borderBottom: '1px solid #e0e0e0',
+                                                    '&:last-child': { borderBottom: 'none' },
+                                                }}
+                                            >
+                                                <HelpOutlineIcon sx={{ color: '#2fb34a', fontSize: 20, mt: 0.5 }} />
+                                                <Box sx={{ flex: 1 }}>
+                                                    <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 0.5 }}>
+                                                        {post.title}
+                                                    </Typography>
+                                                    <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mb: 0.5 }}>
+                                                        {post.location} {post.age} {post.gender}
+                                                    </Typography>
+                                                    <Typography variant="body2" color="text.secondary">
+                                                        {post.snippet}
+                                                    </Typography>
+                                                </Box>
+                                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                                    <Button
+                                                        size="small"
+                                                        sx={{
+                                                            bgcolor: '#9e9e9e',
+                                                            color: 'white',
+                                                            fontSize: '0.75rem',
+                                                            px: 1.5,
+                                                            py: 0.5,
+                                                            minWidth: 'auto',
+                                                            '&:hover': { bgcolor: '#757575' },
+                                                        }}
+                                                    >
+                                                        相談終了
+                                                    </Button>
+                                                    <Typography variant="body2" sx={{ color: '#d17b00', fontWeight: 700, minWidth: '35px' }}>
+                                                        {post.comment_count}件
+                                                    </Typography>
+                                                </Box>
                                             </Box>
-                                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                                <Button
-                                                    size="small"
-                                                    sx={{
-                                                        bgcolor: '#9e9e9e',
-                                                        color: 'white',
-                                                        fontSize: '0.75rem',
-                                                        px: 1.5,
-                                                        py: 0.5,
-                                                        minWidth: 'auto',
-                                                        '&:hover': { bgcolor: '#757575' },
-                                                    }}
-                                                >
-                                                    相談終了
-                                                </Button>
-                                                <Typography variant="body2" sx={{ color: '#d17b00', fontWeight: 700, minWidth: '35px' }}>
-                                                    {post.commentCount}件
-                                                </Typography>
-                                            </Box>
-                                        </Box>
-                                    ))}
+                                        ))
+                                    )}
                                 </Stack>
                             </Paper>
                         </Box>
