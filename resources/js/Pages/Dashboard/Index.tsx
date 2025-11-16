@@ -95,7 +95,7 @@ export default function Welcome({ posts }: Props) {
                                 求人を探す
                             </Button>
                             <Divider orientation="vertical" flexItem sx={{ bgcolor: 'rgba(255,255,255,0.4)' }} />
-                            <Button startIcon={<ForumIcon />} sx={{ color: 'white', flex: 1, py: 1.5 }}>
+                            <Button component={Link} href="/posts" startIcon={<ForumIcon />} sx={{ color: 'white', flex: 1, py: 1.5 }}>
                                 教えて掲示板
                             </Button>
                         </Stack>

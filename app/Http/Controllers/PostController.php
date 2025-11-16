@@ -18,6 +18,7 @@ class PostController extends Controller
     {
         $posts = Post::query()
             ->latest('id')
+            ->limit(30)
             ->get([
                 'id',
                 'title',
@@ -29,8 +30,11 @@ class PostController extends Controller
                 'status',
             ]);
 
-        return Inertia::render('Dashboard/Index', [
+        $totalCount = Post::count();
+
+        return Inertia::render('Posts/Index', [
             'posts' => $posts,
+            'totalCount' => $totalCount,
         ]);
     }
 
@@ -109,6 +113,15 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    public function destroy(Post $post): RedirectResponse
+    {
+        $post->delete();
+
+        return redirect()
+            ->route('posts.index')
+            ->with('success', '投稿を削除しました。');
+    }
+
     protected function ageGroups(): array
     {
         return [
