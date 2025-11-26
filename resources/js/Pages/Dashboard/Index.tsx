@@ -282,10 +282,10 @@ export default function Welcome({ posts }: Props) {
                                         相談したい方はこちら
                                     </Typography>
                                     <Stack direction="row" spacing={1}>
-                                        <Button variant="contained" fullWidth startIcon={<PersonIcon />}>
+                                        <Button component={Link} href="/register" variant="contained" fullWidth startIcon={<PersonIcon />}>
                                             会員登録
                                         </Button>
-                                        <Button variant="outlined" fullWidth>
+                                        <Button component={Link} href="/login" variant="outlined" fullWidth>
                                             ログイン
                                         </Button>
                                     </Stack>

@@ -1,6 +1,6 @@
 import { Head, Link } from '@inertiajs/react';
 import AppLayout from '@/Components/Layouts/AppLayout';
-import PostForm from './PostForm';
+import PostForm from '@/Components/Posts/PostForm';
 import { Container, Paper, Typography, Box, Button } from '@mui/material';
 
 type Props = {

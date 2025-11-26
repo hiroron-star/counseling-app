@@ -6,13 +6,11 @@ import {
     Button,
     Stack,
     TextField,
-    IconButton,
 } from '@mui/material';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import SearchIcon from '@mui/icons-material/Search';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import StoreIcon from '@mui/icons-material/Store';
 import PersonIcon from '@mui/icons-material/Person';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import AppLayout from '@/Components/Layouts/AppLayout';
@@ -136,6 +134,8 @@ export default function PostsIndex({ posts, totalCount = 7060 }: Props) {
                                         posts.map((post) => (
                                             <Box
                                                 key={post.id}
+                                                component={Link}
+                                                href={`/posts/${post.id}`}
                                                 sx={{
                                                     display: 'flex',
                                                     alignItems: 'flex-start',
@@ -143,11 +143,13 @@ export default function PostsIndex({ posts, totalCount = 7060 }: Props) {
                                                     pb: 2,
                                                     borderBottom: '1px solid #e0e0e0',
                                                     '&:last-child': { borderBottom: 'none' },
+                                                    cursor: 'pointer',
+                                                    '&:hover .post-title': { textDecoration: 'underline' },
                                                 }}
                                             >
                                                 <HelpOutlineIcon sx={{ color: '#2fb34a', fontSize: 20, mt: 0.5 }} />
                                                 <Box sx={{ flex: 1 }}>
-                                                    <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 0.5 }}>
+                                                    <Typography className="post-title" variant="subtitle2" sx={{ fontWeight: 700, mb: 0.5 }}>
                                                         {post.title}
                                                     </Typography>
                                                     <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mb: 0.5 }}>
@@ -227,10 +229,10 @@ export default function PostsIndex({ posts, totalCount = 7060 }: Props) {
                                         相談したい方はこちら
                                     </Typography>
                                     <Stack direction="row" spacing={1}>
-                                        <Button variant="contained" sx={{ bgcolor: '#d17b00', '&:hover': { bgcolor: '#b86900' } }} fullWidth startIcon={<PersonIcon />}>
+                                        <Button component={Link} href="/register" variant="contained" sx={{ bgcolor: '#d17b00', '&:hover': { bgcolor: '#b86900' } }} fullWidth startIcon={<PersonIcon />}>
                                             会員登録
                                         </Button>
-                                        <Button variant="outlined" sx={{ borderColor: '#d17b00', color: '#d17b00' }} fullWidth>
+                                        <Button component={Link} href="/login" variant="outlined" sx={{ borderColor: '#d17b00', color: '#d17b00' }} fullWidth>
                                             ログイン
                                         </Button>
                                     </Stack>

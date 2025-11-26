@@ -68,9 +68,21 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $post)
+    public function show(Post $post): Response
     {
-        //
+        return Inertia::render('Posts/Show', [
+            'post' => $post->only([
+                'id',
+                'title',
+                'location',
+                'age_group',
+                'gender',
+                'snippet',
+                'comment_count',
+                'status',
+                'created_at',
+            ]),
+        ]);
     }
 
     /**
